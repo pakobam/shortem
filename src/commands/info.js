@@ -7,12 +7,19 @@ module.exports = {
     if(!url && !slug)return await msg.reply({ embeds: [{ description: 'Please Provide A URL Or Slug', color: '#e83838' }], ephemeral: true });
 
     if(slug){
-      var data = await db.get(slug);
+      var datas = await db.list();
+      var data;
+    for(e of datas) {
+     if(e.startsWith(`${slug}`)) {
+       data = (await db.get(e));
+       slug = e;
+     }
+      }
       if(!data)return await msg.reply({ embeds: [{ description: 'This Slug Does Not Exist', color: '#e83838' }], ephemeral: true });
 
       await msg.reply({
         embeds: [{
-          description: `**Slug:** \`${slug}\`\n**URL:** \`${data}\``,
+          description: `**Slug:** [\`${slug.split('/')[0]}\`](https://ink.is-a.dev/${slug.split('/')[0]})\n**URL:** \`${data}\`\n**Created By:** \`${slug.split('/')[1]}\``,
           color: '#03fc2c'
         }]
       })
@@ -34,7 +41,7 @@ module.exports = {
      if(slug){
       await msg.reply({
        embeds: [{
-          description: `**Slug:** \`${slug}\`\n**URL:** \`${url}\``,
+          description: `**Slug:** [\`${slug.split('/')[0]}\`](https://ink.is-a.dev/${slug.split('/')[0]})\n**URL:** \`${url}\`\n**Created By:** \`${slug.split('/')[1]}\``,
           color: '#03fc2c'
         }]
       })
