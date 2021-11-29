@@ -4,7 +4,7 @@ module.exports = {
  if(msg.user.id != process.env.owner_id)return msg.reply({ embeds: [{ description: 'You Don\'t Have Permission To Run This Command', color: '#e83838' }], ephemeral: true });
    
     var slug = msg.options.getString('slug');
-    if(!msg?.member?.roles.includes('903941355674402817'))return await msg.reply({ embeds: [{ description: 'You Don\'t Have Permission To Run This Command', color: '#e83838' }], ephemeral: true });
+    if(!msg?.member?.roles.includes())return await msg.reply({ embeds: [{ description: 'You Don\'t Have Permission To Run This Command', color: '#e83838' }], ephemeral: true });
     if(!slug)return await msg.reply({ embeds: [{ description: 'Something Went Wrong', color: '#e83838' }], ephemeral: true });
 
     var datas = await db.list();
